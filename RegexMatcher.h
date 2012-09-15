@@ -11,27 +11,42 @@
 
 class RegexMatcher {
 public:
-	RegexMatcher() : root(new Node(0)) {}
+	
+	RegexMatcher() : start(new Edge(0)) {}
 	~RegexMatcher() {
 		deleteAll();
 	}
 	
-	void stateMachineBuild(std::string a);
+	enum RegexMatchResult {
+		RegexMatcherPlaceHolder = 0,
+		RegexMatcherInvalid,
+		RegexMatcherNotMatch,
+		RegexMatcherMatch
+	};
 	
+	void regexMatcherMachineBuild(std::string a);
+	RegexMatchResult regexMatch(std::string b);
 private:
-	struct Node{
-		Node() : next(NULL), numNext(0) {};
-		Node(char val) : value(val), next(NULL), numNext(0) {};
+	struct Edge {
+		Edge() : next(NULL), numNext(0) {};
+		Edge(char val) : value(val), next(NULL), numNext(0) {};
+		
 		char value;
-		Node** next;
+		Edge **next;
 		unsigned int numNext;
 	};
 	
-	Node* root;
+	Edge *start;
 	
-	void addNode(Node* curNode, char val);
+	Edge* makeEdge(char val);
+	int addNumNext(Edge *curEdge);
+	void linkEdge(Edge *curEdge, Edge *nextEdge);
+	
+	
+	RegexMatchResult regexMatchEdge(Edge *edge, std::string b, RegexMatchResult re);
+
 	void deleteAll();
-	
+	void escapeCharacterMatch();
 };
 
 

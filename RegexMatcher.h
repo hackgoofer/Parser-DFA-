@@ -41,7 +41,7 @@ private:
 	Edge* makeEdge(char val);
 	int addNumNext(Edge *curEdge);
 	void linkEdge(Edge *curEdge, Edge *nextEdge);
-	
+	bool isNewEdge(Edge *t, char a, Edge *newEdge);
 	
 	RegexMatchResult regexMatchEdge(Edge *edge, std::string b, RegexMatchResult re);
 

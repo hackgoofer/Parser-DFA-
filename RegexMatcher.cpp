@@ -22,7 +22,7 @@ void RegexMatcher::regexMatcherMachineBuild(std::string a) {
 			continue;
 		} else if (a[i] <= 'z' && a[i] >= 'a') {			
 			newEdge = makeEdge(a[i]);
-			linkEdge(thisEdge, newEdge);
+			linkEdge(thisEdge, newEdge);			
 			thisEdge = newEdge;
 			
 			if (prevOpenParen > 0) {
@@ -33,6 +33,11 @@ void RegexMatcher::regexMatcherMachineBuild(std::string a) {
 			continue;
 		} else if (a[i] == '*') {
 			linkEdge(thisEdge, futureDest);
+		} else if (a[i] == '+') { // one or more
+			
+		} else if (a[i] == '?') { // zero or one
+			
+		
 		} else { // a[i] == '\0'
 			return;
 		}
